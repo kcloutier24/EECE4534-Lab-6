@@ -1,0 +1,9 @@
+#
+*.o
+*.ko
+# generated during compilation -> ignore
+echo.mod
+echo.mod.c
+Module.symvers
+modules.order
+*.cmd

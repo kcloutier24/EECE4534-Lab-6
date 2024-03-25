@@ -1,0 +1,26 @@
+name: Populate Issues
+
+on:
+  create:
+
+  # Allows this workflow to be manually run from the Actions tab
+  workflow_dispatch:
+
+env:
+  ISSUES_DIR: ".github/STARTING_ISSUES/"
+
+jobs:
+  create:
+    name: Create issues
+    permissions: write-all
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/feedback' }}  # only run when feedback branch is created
+                                                    # feedback branch is created just after repository creation
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create issues
+        uses: markpatterson27/create-issues@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          issues-directory: ".github/STARTING_ISSUES/"
